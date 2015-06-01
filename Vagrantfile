@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 box         = 'ubuntu/trusty64'
-projectname = 'public'
+projectname = 'projectname'
 hostname    = projectname + '-hostname'
 domain      = '.dev'
 

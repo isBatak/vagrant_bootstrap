@@ -2,7 +2,7 @@
 
 # Use single quotes instead of double quotes to make it work with special-character passwords
 PASSWORD='root'
-PROJECTFOLDER='klio'
+PROJECTFOLDER='public'
 
 # create project folder
 sudo mkdir "/var/www/public_html/${PROJECTFOLDER}"
@@ -46,6 +46,17 @@ VHOST=$(cat <<EOF
 EOF
 )
 echo "${VHOST}" > /etc/apache2/sites-available/000-default.conf
+
+# setup php.ini file
+post_max_size=800M
+upload_max_filesize=800M
+max_execution_time=5000
+max_input_time=5000
+memory_limit=1000M
+for key in post_max_size upload_max_filesize max_execution_time max_input_time memory_limit
+do
+ sed -i.bak "s/^\($key\).*/\1 $(eval echo \${$key})/" /etc/php5/apache2/php.ini
+done
 
 # enable mod_rewrite
 sudo a2enmod rewrite
