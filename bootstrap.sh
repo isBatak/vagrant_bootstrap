@@ -11,9 +11,20 @@ sudo mkdir "/var/www/public_html/${PROJECTFOLDER}"
 sudo apt-get update
 sudo apt-get -y upgrade
 
-# install apache 2.5 and php 5.5
+# install apache 2.5 and php 5.5 and xdebug
 sudo apt-get install -y apache2
 sudo apt-get install -y php5
+sudo apt-get install -y php5-xdebug
+
+# xdebug Config
+cat << EOF | sudo tee -a /etc/php5/mods-available/xdebug.ini
+xdebug.remote_enable = on
+xdebug.remote_connect_back = on
+xdebug.idekey = "vagrant"
+xdebug.scream=1
+xdebug.cli_color=1
+xdebug.show_local_vars=1
+EOF
 
 # install mysql and give password to installer
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $PASSWORD"
