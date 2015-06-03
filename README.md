@@ -8,6 +8,7 @@ What will you get:
 - php 5.5
 - mysql
 - phpmyadmin
+- xDebug
 - enabled mod_rewrite
 - virtual host
 - increased post_max_size, upload_max_filesize, ect.
